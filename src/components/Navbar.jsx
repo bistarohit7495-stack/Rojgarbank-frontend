@@ -4,6 +4,7 @@ import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
 import { Avatar, AvatarImage } from './ui/avatar';
 import { Button } from './ui/button';
 import { LogOut, User } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 
 
@@ -27,9 +28,9 @@ const user= false;
             </div>
             <div>
                 {!user ? (
-                    <div className="flex items-center gap-4">
-                        <Button variant="outline">Login</Button>
-                        <Button className="bg-sky-600 hover:bg-sky-600">Register</Button>
+                    <div className="flex items-center gap-4 ">
+                        <Link to="/login"><Button variant="outline">Login</Button></Link>
+                        <Link to="/register"><Button className="bg-sky-600 hover:bg-sky-800">Register</Button></Link>
                     </div>
                 )   :   (
                      <Popover>
