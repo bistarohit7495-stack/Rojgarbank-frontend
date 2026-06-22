@@ -68,7 +68,7 @@ const Login = () => {
                         </RadioGroup>
 
                     </div>
-                    <Button className="bg-sky-600 my-3 hover:bg-sky-800 mt-5 rounded-md block w-full font-semibold">Login</Button>
+                    <Button className="bg-sky-600 my-3 hover:bg-sky-800 mt-0 rounded-md block w-half font-semibold">Login</Button>
                     {/* don't have an account? */}
                     <p className="text-md text-center text-gray-500 my-2">Don't have an account?
                         <Link to="/register" className="text-sky-600 hover:underline font-semibold">

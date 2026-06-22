@@ -9,11 +9,12 @@ import { Link } from 'react-router-dom';
 
 
 
+
 const Navbar = () => {
 const user= false; 
   return (
     <div className="bg-white">
-        <div className="flex justify-between items-center mx-auto max-w-7xl h-45 ">
+        <div className="flex justify-between items-center mx-auto max-w-7xl h-25 ">
             <div>
                 <img src={logo}  alt="Logo" className="w-33 h-33" />
 

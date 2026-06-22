@@ -92,8 +92,7 @@ const Register = () => {
               onChange={changeFileHandler}
               className="cursor-pointer" />
           </div>
-          <button type="submit" className="bg-sky-600 my-3 hover:bg-sky-800 mt-5 rounded-md block w-full font-semibold">Register</button>
-
+          <button type="submit" className="bg-sky-600 my-3 hover:bg-sky-800 mt-5 rounded-md block w-1/2 h-10 font-bold justify-center text-white">Register</button>
           {/* Already have an account? */}
           <p className="text-md text-center text-gray-500 my-2">Already have an account?
             <Link to="/login" className="text-sky-600 hover:underline font-semibold">
