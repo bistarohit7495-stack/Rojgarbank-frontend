@@ -1,13 +1,14 @@
 import React from 'react'
 import { Button } from './ui/button'
 import { IoSearchSharp } from "react-icons/io5";
-
+import image from '../assets/home.png'
 
 
 const Header = () => {
     return (
         <div>
             <div className="text-center">
+                <img src={image} alt="" className="w-full h-[450px] shadow-l" />
                 <div className="flex flex-col gap-5 my-10">
                     <span className="px-4 py-2 mx-auto rounded-full shadow-lg bg-gray-200 font-semibold text-sky-600">Your Gateway to Career Success </span>
                     <h2 className="text-4xl font-bold">
