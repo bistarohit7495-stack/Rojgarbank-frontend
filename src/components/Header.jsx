@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button } from './ui/button'
 import { IoSearchSharp } from "react-icons/io5";
-import image from '../assets/home.png'
+import image from '../assets/homee.png'
 
 
 const Header = () => {

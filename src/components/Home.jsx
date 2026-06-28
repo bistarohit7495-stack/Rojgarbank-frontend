@@ -6,6 +6,8 @@ import Footer from './Footer'
 import Topemployers from './Topemployers'
 import Whyus from './Whyus'
 import Faq from './Faq'
+import FeaturesSection from './FeaturesSection'
+import CTABanner from './Ctabanner'
 
 
 const Home = () => {
@@ -16,6 +18,8 @@ const Home = () => {
       <Topemployers/>
       <Latestjobs/>
       <Whyus/>
+      <FeaturesSection/>
+      <CTABanner/>
       <Faq/>
       <Footer/>
     

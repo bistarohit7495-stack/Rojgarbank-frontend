@@ -4,6 +4,7 @@
 @import "@fontsource-variable/jetbrains-mono";
 
 
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -128,4 +129,8 @@
   html {
     @apply font-mono;
     }
+}
+
+body {
+  font-family: "Inter", sans-serif;
 }
