@@ -1,54 +1,75 @@
-import React from 'react'
-import { Button } from './ui/button';
-
+import React from "react";
+import { Button } from "./ui/button";
+import { ArrowRight } from "lucide-react";
 
 const stats = [
-    { value: "10K+", label: "CANDIDATE" },
-    { value: "100+", label: "JOBS DAILY" },
-    { value: "200+", label: "COMPANIES" },
-    { value: "5+", label: "YEARS" },
-    { value: "500+", label: "DAILY VISITS" },
+    { value: "10K+", label: "Candidates" },
+    { value: "100+", label: "Jobs Daily" },
+    { value: "200+", label: "Companies" },
+    { value: "5+", label: "Years" },
+    { value: "500+", label: "Daily Visits" },
 ];
-
 
 const Ctabanner = () => {
     return (
-        <section className="px-4 py-10">
-            <div className="w-full bg-gradient-to-r from-teal-400 to-cyan-600 px-8 py-12 text-white text-center rounded-3xl">
-                {/* Heading */}
-                <h2 className="text-2xl md:text-3xl font-bold mb-4">
-                    Find Your Dream Job in Nepal Now with RogjarBank
-                </h2>
+        <section className="px-4 md:px-8 py-16">
+            <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-cyan-400 via-sky-400 to-blue-300 px-6 py-14 md:px-12 md:py-16 text-white shadow-2xl">
 
-                {/* Description */}
-                <p className="text-sm md:text-base text-white/90 max-w-2xl mx-auto mb-8 leading-relaxed">
-                    Ready to move to the next level in your career? Start today with RogjarBank! Create your
-                    free profile, upload your resume, and apply for hundreds of available jobs in a few easy
-                    steps. Whether you're looking for jobs in Kathmandu, or anywhere else in Nepal, RogjarBank
-                    is here to help you get connected to your dream job.
-                </p>
+                {/* Background Decorations */}
+                <div className="absolute -top-24 -left-20 h-64 w-64 rounded-full bg-white/10 blur-3xl"></div>
+                <div className="absolute -bottom-24 -right-20 h-72 w-72 rounded-full bg-cyan-200/20 blur-3xl"></div>
 
-                {/* CTA Button */}
-                <Button className="bg-white text-cyan-600 font-semibold text-sm px-8 py-3 rounded-full hover:bg-cyan-50 transition-colors duration-200 inline-flex items-center gap-2">
-                    Search Jobs Now <span>→</span>
-                </Button>
+                {/* Content */}
+                <div className="relative z-10 max-w-4xl mx-auto text-center">
 
-                {/* Divider */}
-                <div className="border-t border-white/20 mt-10 mb-8" />
+                    <h2 className="text-3xl md:text-5xl font-bold leading-tight">
+                        Find Your Dream Job in Nepal
+                        <span className="block text-cyan-100">
+                            with RogjarBank
+                        </span>
+                    </h2>
 
-                {/* Stats */}
-                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6">
-                    {stats.map(({ value, label }) => (
-                        <div key={label} className="flex flex-col items-center">
-                            <span className="text-3xl font-bold">{value}</span>
-                            <span className="text-xs tracking-widest text-white/80 mt-1">{label}</span>
-                        </div>
-                    ))}
+                    <p className="mt-6 text-white/90 text-base md:text-lg leading-8 max-w-3xl mx-auto">
+                        Create your free profile, upload your resume, and apply to
+                        hundreds of verified jobs across Nepal. Whether you're a fresher
+                        or an experienced professional, RogjarBank helps you connect
+                        with top employers.
+                    </p>
+
+                    {/* CTA */}
+                    <Button
+                        className="mt-8 rounded-full bg-white px-8 py-6 text-cyan-600 font-semibold text-base shadow-lg transition-all duration-300 hover:scale-105 hover:bg-cyan-50"
+                    >
+                        Search Jobs
+                        <ArrowRight className="ml-2 h-5 w-5" />
+                    </Button>
+
+                    {/* Divider */}
+                    <div className="my-12 border-t border-white/20"></div>
+
+                    {/* Stats */}
+                    <div className="grid grid-cols-2 gap-5 md:grid-cols-3 lg:grid-cols-5">
+
+                        {stats.map((item) => (
+                            <div
+                                key={item.label}
+                                className="rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 p-5 transition duration-300 hover:bg-white/20 hover:-translate-y-1"
+                            >
+                                <h3 className="text-3xl font-bold">
+                                    {item.value}
+                                </h3>
+
+                                <p className="mt-2 text-sm uppercase tracking-widest text-white/80">
+                                    {item.label}
+                                </p>
+                            </div>
+                        ))}
+
+                    </div>
                 </div>
             </div>
         </section>
+    );
+};
 
-    )
-}
-
-export default Ctabanner
+export default Ctabanner;

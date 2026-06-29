@@ -2,6 +2,11 @@ import React from 'react'
 import Jobcards from './Jobcards'
 const randomJobs = [1, 2, 3, 4];
 
+const levels = ["Senior", "Mid", "Junior", "Entry Level", "Fresher"];
+const categories = ["All Categories", "IT", "Finance", "Marketing", "Engineering"];
+
+
+
 const LatestJobs = () => {
     return (
         <div className="max-w-7xl ml-10 my-20">
@@ -16,6 +21,7 @@ const LatestJobs = () => {
                         <Jobcards key={index}/>
                     ))}
             </div>
+            
 
         </div>
     )
