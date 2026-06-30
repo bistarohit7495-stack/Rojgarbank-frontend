@@ -1,13 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import logo from '../assets/logoo.jpeg';
 import { LogOut, User, ChevronDown, Menu, X, Briefcase, Settings, BookOpen, Building2, Code, Megaphone } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
 import { Avatar, AvatarImage } from './ui/avatar';
-import { Button } from './ui/button';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from './ui/dropdown-menu';
 
-// Jobs Categories dropdown items
 const jobCategories = [
     { label: 'IT & Technology', to: '/jobs/it', icon: Code },
     { label: 'Banking & Finance', to: '/jobs/banking', icon: Building2 },
@@ -17,7 +14,6 @@ const jobCategories = [
     { label: 'Business & Management', to: '/jobs/business', icon: Briefcase },
 ];
 
-// Services dropdown items
 const services = [
     { label: 'Resume Builder', to: '/services/resume', icon: BookOpen },
     { label: 'Career Counseling', to: '/services/counseling', icon: User },
@@ -25,7 +21,6 @@ const services = [
     { label: 'Skill Assessment', to: '/services/assessment', icon: Settings },
 ];
 
-// Simple links (no dropdown)
 const simpleLinks = [
     { label: 'Training', to: '/training' },
     { label: 'Blogs', to: '/blogs' },
@@ -33,10 +28,57 @@ const simpleLinks = [
     { label: 'Contact', to: '/contact' },
 ];
 
+// Reusable plain hover dropdown — no Radix, so no internal pointer conflicts
+const HoverDropdown = ({ triggerLabel, triggerClassName, items, align = 'left' }) => {
+    const [open, setOpen] = useState(false);
+    const closeTimeout = useRef(null);
+
+    const handleEnter = () => {
+        if (closeTimeout.current) {
+            clearTimeout(closeTimeout.current);
+            closeTimeout.current = null;
+        }
+        setOpen(true);
+    };
+
+    const handleLeave = () => {
+        closeTimeout.current = setTimeout(() => setOpen(false), 150);
+    };
+
+    return (
+        <div className="relative" onMouseEnter={handleEnter} onMouseLeave={handleLeave}>
+            <button
+                style={{ cursor: 'pointer' }}
+                className={triggerClassName}
+            >
+                {triggerLabel}
+                <ChevronDown className={`h-3.5 w-3.5 transition-transform duration-300 ${open ? 'rotate-180' : ''}`} />
+            </button>
+
+            {open && (
+                <div
+                    className={`absolute top-full mt-2 ${align === 'right' ? 'right-0' : 'left-0'} w-56 rounded-xl shadow-lg bg-white border border-gray-100 p-1 z-50`}
+                >
+                    {items.map(({ label, to, icon: Icon }) => (
+                        <Link
+                            key={label}
+                            to={to}
+                            style={{ cursor: 'pointer' }}
+                            className="flex items-center gap-2.5 text-sm text-black hover:text-cyan-600 hover:bg-gray-50 px-3 py-2 rounded-lg"
+                        >
+                            {Icon && <Icon className="w-4 h-4 text-cyan-500" />}
+                            {label}
+                        </Link>
+                    ))}
+                </div>
+            )}
+        </div>
+    );
+};
+
 const Navbar = () => {
     const user = false;
     const [mobileOpen, setMobileOpen] = useState(false);
-    const [openDropdown, setOpenDropdown] = useState(null);
 
     return (
         <nav className="bg-white sticky top-0 z-50 shadow-sm border-b border-gray-100">
@@ -47,56 +89,27 @@ const Navbar = () => {
                     <img src={logo} alt="Logo" className="h-20 w-auto object-contain -translate-x-8" />
                 </Link>
 
-
                 {/* Desktop Nav Links */}
                 <ul className="hidden lg:flex items-center gap-7">
-
-                    {/* Jobs Categories — dropdown */}
                     <li>
-                        <DropdownMenu>
-                            <DropdownMenuTrigger asChild>
-                                <button className="flex items-center gap-1 text-md font-medium text-black hover:text-cyan-600 transition-colors select-none outline-none">
-                                    Jobs Categories <ChevronDown className="h-3.5 w-3.5" />
-                                </button>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent align="start" className="w-56 rounded-xl shadow-lg p-1">
-                                {jobCategories.map(({ label, to, icon: Icon }) => (
-                                    <DropdownMenuItem key={label} asChild>
-                                        <Link to={to} className="flex items-center gap-2.5 text-sm text-black hover:text-cyan-600 px-3 py-2 rounded-lg">
-                                            <Icon className="w-4 h-4 text-cyan-500" />
-                                            {label}
-                                        </Link>
-                                    </DropdownMenuItem>
-                                ))}
-                            </DropdownMenuContent>
-                        </DropdownMenu>
+                        <HoverDropdown
+                            triggerLabel="Jobs Categories"
+                            triggerClassName="flex items-center gap-1 text-md font-medium text-black hover:text-cyan-600 transition-colors select-none outline-none"
+                            items={jobCategories}
+                        />
                     </li>
 
-                    {/* Services — dropdown */}
                     <li>
-                        <DropdownMenu>
-                            <DropdownMenuTrigger asChild>
-                                <button className="flex items-center gap-1 text-md font-medium text-black hover:text-cyan-600 transition-colors select-none outline-none">
-                                    Services <ChevronDown className="h-3.5 w-3.5" />
-                                </button>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent align="start" className="w-52 rounded-xl shadow-lg p-1">
-                                {services.map(({ label, to, icon: Icon }) => (
-                                    <DropdownMenuItem key={label} asChild>
-                                        <Link to={to} className="flex items-center gap-2.5 text-sm text-black hover:text-cyan-600 px-3 py-2 rounded-lg">
-                                            <Icon className="w-4 h-4 text-cyan-500" />
-                                            {label}
-                                        </Link>
-                                    </DropdownMenuItem>
-                                ))}
-                            </DropdownMenuContent>
-                        </DropdownMenu>
+                        <HoverDropdown
+                            triggerLabel="Services"
+                            triggerClassName="flex items-center gap-1 text-md font-medium text-black hover:text-cyan-600 transition-colors select-none outline-none"
+                            items={services}
+                        />
                     </li>
 
-                    {/* Simple links */}
                     {simpleLinks.map(({ label, to }) => (
                         <li key={label}>
-                            <Link to={to} className="text-md font-medium text-black hover:text-cyan-600 transition-colors duration-150">
+                            <Link to={to} style={{ cursor: 'pointer' }} className="text-md font-medium text-black hover:text-cyan-600 transition-colors duration-150">
                                 {label}
                             </Link>
                         </li>
@@ -107,42 +120,30 @@ const Navbar = () => {
                 <div className="hidden lg:flex items-center translate-x-15 gap-4">
                     {!user ? (
                         <div className="flex items-center gap-3">
-                            {/* For JobSeekers */}
-                            <DropdownMenu onOpenChange={(open) => setOpenDropdown(open ? 'jobseeker' : null)}>
-                                <DropdownMenuTrigger className="text-sm font-semibold text-gray-700 rounded-full hover:text-cyan-600 select-none outline-none flex items-center gap-1 px-4 py-2">
-                                    For JobSeekers
-                                    <ChevronDown className={`ml-1 h-4 w-4 transition-transform duration-300 ${openDropdown === 'jobseeker' ? 'rotate-180' : ''}`} />
-                                </DropdownMenuTrigger>
-                                <DropdownMenuContent align="end" className="w-44 rounded-xl shadow-lg">
-                                    <DropdownMenuItem asChild>
-                                        <Link to="/login" className="w-full text-sm">Login</Link>
-                                    </DropdownMenuItem>
-                                    <DropdownMenuItem asChild>
-                                        <Link to="/register" className="w-full text-sm">Register</Link>
-                                    </DropdownMenuItem>
-                                </DropdownMenuContent>
-                            </DropdownMenu>
+                            <HoverDropdown
+                                triggerLabel="For JobSeekers"
+                                triggerClassName="text-sm font-semibold text-gray-700 rounded-full hover:text-cyan-600 select-none outline-none flex items-center gap-1 px-4 py-2"
+                                items={[
+                                    { label: 'Login', to: '/login' },
+                                    { label: 'Register', to: '/register' },
+                                ]}
+                                align="right"
+                            />
 
-                            {/* For Employers */}
-                            <DropdownMenu onOpenChange={(open) => setOpenDropdown(open ? 'employer' : null)}>
-                                <DropdownMenuTrigger className="text-sm font-semibold bg-cyan-600 hover:bg-cyan-700 text-white rounded-full px-5 select-none outline-none flex items-center gap-1 py-2">
-                                    For Employers
-                                    <ChevronDown className={`ml-1 h-4 w-4 transition-transform duration-300 ${openDropdown === 'employer' ? 'rotate-180' : ''}`} />
-                                </DropdownMenuTrigger>
-                                <DropdownMenuContent align="end" className="w-44 rounded-xl shadow-lg">
-                                    <DropdownMenuItem asChild>
-                                        <Link to="/login" className="w-full text-sm">Login</Link>
-                                    </DropdownMenuItem>
-                                    <DropdownMenuItem asChild>
-                                        <Link to="/register" className="w-full text-sm">Register</Link>
-                                    </DropdownMenuItem>
-                                </DropdownMenuContent>
-                            </DropdownMenu>
+                            <HoverDropdown
+                                triggerLabel="For Employers"
+                                triggerClassName="text-sm font-semibold bg-cyan-600 hover:bg-cyan-700 text-white rounded-full px-5 select-none outline-none flex items-center gap-1 py-2"
+                                items={[
+                                    { label: 'Login', to: '/employer/login' },
+                                    { label: 'Register', to: '/employer/register' },
+                                ]}
+                                align="right"
+                            />
                         </div>
                     ) : (
                         <Popover>
                             <PopoverTrigger asChild>
-                                <Avatar className="cursor-pointer ring-2 ring-transparent hover:ring-cyan-400 transition">
+                                <Avatar style={{ cursor: 'pointer' }} className="ring-2 ring-transparent hover:ring-cyan-400 transition">
                                     <AvatarImage src="https://github.com/shadcn.png" alt="user" />
                                 </Avatar>
                             </PopoverTrigger>
@@ -158,10 +159,10 @@ const Navbar = () => {
                                 </div>
                                 <div className="border-t border-gray-100 mb-3" />
                                 <div className="flex flex-col gap-1">
-                                    <Link to="/profile" className="flex items-center gap-2 text-sm text-gray-600 hover:text-cyan-600 px-2 py-1.5 rounded-lg hover:bg-cyan-50 transition-colors">
+                                    <Link to="/profile" style={{ cursor: 'pointer' }} className="flex items-center gap-2 text-sm text-gray-600 hover:text-cyan-600 px-2 py-1.5 rounded-lg hover:bg-cyan-50 transition-colors">
                                         <User className="w-4 h-4" /> Profile
                                     </Link>
-                                    <button className="flex items-center gap-2 text-sm text-gray-600 hover:text-red-500 px-2 py-1.5 rounded-lg hover:bg-red-50 transition-colors">
+                                    <button style={{ cursor: 'pointer' }} className="flex items-center gap-2 text-sm text-gray-600 hover:text-red-500 px-2 py-1.5 rounded-lg hover:bg-red-50 transition-colors">
                                         <LogOut className="w-4 h-4" /> Logout
                                     </button>
                                 </div>
@@ -172,6 +173,7 @@ const Navbar = () => {
 
                 {/* Mobile hamburger */}
                 <button
+                    style={{ cursor: 'pointer' }}
                     className="lg:hidden p-2 rounded-lg text-gray-600 hover:bg-gray-100"
                     onClick={() => setMobileOpen(!mobileOpen)}
                 >

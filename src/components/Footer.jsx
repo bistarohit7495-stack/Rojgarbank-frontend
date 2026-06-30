@@ -1,12 +1,12 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from "react"
+import { Link } from "react-router-dom"
+import logo from "../assets/logoo.jpeg"
 import {
   Mail,
   Phone,
   MapPin,
   ArrowRight,
-  Briefcase,
-} from "lucide-react";
+} from "lucide-react"
 
 const Footer = () => {
   return (
@@ -19,8 +19,8 @@ const Footer = () => {
           {/* Company */}
           <div>
             <div className="flex items-center gap-3 mb-5">
-              <div className="w-11 h-11 bg-cyan-500 rounded-xl flex items-center justify-center">
-                <Briefcase className="w-6 h-6 text-white" />
+              <div>
+                <img src={logo} alt="logo" className="w-10 h-10 text-white" />
               </div>
 
               <h2 className="text-2xl font-bold">
@@ -149,29 +149,6 @@ const Footer = () => {
             </span>
             . All Rights Reserved.
           </p>
-
-          <div className="flex gap-6 text-sm">
-            <Link
-              to="/privacy"
-              className="text-black hover:text-cyan-400 transition"
-            >
-              Privacy Policy
-            </Link>
-
-            <Link
-              to="/terms"
-              className="text-black hover:text-cyan-400 transition"
-            >
-              Terms & Conditions
-            </Link>
-
-            <Link
-              to="/contact"
-              className="text-black hover:text-cyan-400 transition"
-            >
-              Support
-            </Link>
-          </div>
 
         </div>
 
