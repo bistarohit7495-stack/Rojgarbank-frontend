@@ -20,9 +20,12 @@ const Footer = () => {
           <div>
             <div className="flex items-center gap-3 mb-5">
               <div>
-                <img src={logo} alt="logo" className="w-10 h-10 text-white" />
+                <img
+                  src={logo}
+                  alt="logo"
+                  className="w-20 h-20 rounded-full bg-white p-1 object-contain"
+                />
               </div>
-
               <h2 className="text-2xl font-bold">
                 Rojgar
                 <span className="text-cyan-400">Bank</span>
@@ -85,7 +88,7 @@ const Footer = () => {
                 </Link>
               </li>
 
-               <li>
+              <li>
                 <Link
                   to="/services" className="flex items-center gap-2 text-white hover:text-cyan-400 transition">
                   <ArrowRight className="w-4 h-4" />

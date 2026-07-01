@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import logo from '../assets/logoo.jpeg';
-import { LogOut, User, ChevronDown, Menu, X, Briefcase, Settings, BookOpen, Building2, Code, Megaphone } from 'lucide-react';
+import { LogOut, User, ChevronDown, Menu, X,Briefcase, Settings, BookOpen, Building2, Code, Megaphone } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
 import { Avatar, AvatarImage } from './ui/avatar';
@@ -134,8 +134,8 @@ const Navbar = () => {
                                 triggerLabel="For Employers"
                                 triggerClassName="text-sm font-semibold bg-cyan-600 hover:bg-cyan-700 text-white rounded-full px-5 select-none outline-none flex items-center gap-1 py-2"
                                 items={[
-                                    { label: 'Login', to: '/employer/login' },
-                                    { label: 'Register', to: '/employer/register' },
+                                    { label: 'Login', to: '/login' },
+                                    { label: 'Register', to: '/register' },
                                 ]}
                                 align="right"
                             />

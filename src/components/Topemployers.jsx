@@ -1,10 +1,14 @@
 import React from 'react'
 import logo from '../assets/logoo.jpeg'
+import logo2 from '../assets/homee.png'
+import logo3 from '../assets/employee.png'
+import logo4 from '../assets/seeker.png'
 
 const employerLogos = [
   { src: logo, alt: "Rojgar Bank" },
-  // { src: logo2, alt: "Company 2" },
-  // { src: logo3, alt: "Company 3" },
+  { src: logo2, alt: "Company 2" },
+  { src: logo3, alt: "Company 3" },
+  { src: logo4, alt: "Company 4"}
 ]
 
 const Topemployers = () => (
