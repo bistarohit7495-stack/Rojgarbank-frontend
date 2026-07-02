@@ -5,6 +5,7 @@ import Home from './components/Home'
 import Login from './components/Login'
 import Register from './components/Register'
 import Contact from './components/Contact'
+import Aboutus from './components/Aboutus'
 
 
 const appRouter = createBrowserRouter([
@@ -23,6 +24,10 @@ const appRouter = createBrowserRouter([
   {
     path: "/contact",
     element: <Contact />
+  },
+  {
+    path:"/about",
+    element:<Aboutus />
   }
 ])
 
